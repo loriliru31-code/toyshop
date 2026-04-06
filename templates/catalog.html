@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Каталог игрушек{% endblock %}
+
+{% block content %}
+<main class="container">
+
+<section class="filter">
+    <div class="filter-header">Фильтр</div>
+    <div class="filter-box">
+        <select id="categorySelect">
+            <option value="">Все категории</option>
+            {% for c in categories %}
+            <option value="{{ c.id }}">{{ c.name }}</option>
+            {% endfor %}
+        </select>
+        <button class="apply-btn">Применить</button>
+    </div>
+</section>
+
+<section class="catalog">
+    <div class="catalog-products-grid">
+        {% for product in products %}
+            <article class="product-card">
+
+    <a href="{{ url_for('products.product_page', product_id=product.id) }}" class="product-link">
+        <div class="product-img-catalog">
+            {% if product.images %}
+                <img src="{{ product.images }}" alt="{{ product.name }}">
+            {% else %}
+                <div class="placeholder-img"></div>
+            {% endif %}
+        </div>
+
+        <p class="product-title">{{ product.name }}</p>
+        <p class="product-price">{{ product.price }} ₽</p>
+    </a>
+
+    <button 
+      type="button"
+      class="btn-cart add-to-cart {% if product.id in cart_ids %}in-cart{% endif %}"
+      data-id="{{ product.id }}"
+      {% if product.id in cart_ids %}disabled{% endif %}
+    >
+      {% if product.id in cart_ids %}
+        ✓ В корзине
+      {% else %}
+        В корзину
+      {% endif %}
+    </button>
+
+</article>
+        {% endfor %}
+    </div>
+</section>
+
+</main>
+{% endblock %}

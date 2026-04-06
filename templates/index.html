@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}ФанПлюш{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+  <div class="container hero-content">
+    <h1>Добро пожаловать в ФанПлюш!</h1>
+    <p>Лучшие плюшевые игрушки по мотивам ваших любимых игр</p>
+    <a href="/catalog"><button>Перейти в каталог →</button></a>
+  </div>
+</section>
+
+<section class="categories-section">
+  <div class="container">
+    <h2>Категории игрушек</h2>
+
+    {% if categories %}
+    <div class="categories-grid">
+      {% for c in categories %}
+      <div class="category-card">
+        <h3>
+          <!-- Ссылка на каталог с параметром category_id -->
+          <a href="/catalog?category_id={{ c.id }}">{{ c.name }}</a>
+        </h3>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="empty">Категории пока не добавлены.</p>
+    {% endif %}
+
+  </div>
+</section>
+
+<section class="featured-products-section">
+  <div class="container">
+    <h2>Популярные товары</h2>
+    <div class="featured-products-grid">
+      {% for p in products[:4] %}
+        <div class="featured-product-card">
+          <!-- фиксированная картинка -->
+          <div class="featured-product-img" style="background-image: url('{{ p.images }}');"></div>
+
+          <!-- название и цена -->
+          <h3>{{ p.name }}</h3>
+          <p>{{ p.price }} ₽</p>
+
+          <!-- кнопка Подробнее -->
+          <a href="/product/{{ p.id }}"><button>Подробнее</button></a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

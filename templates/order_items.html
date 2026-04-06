@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Товары заказа #{{ order_id }} — Плюшевый Хаос{% endblock %}
+
+{% block content %}
+<section class="order-items-page">
+  <div class="container">
+    <h1 class="page-title">Заказ #{{ order_id }}</h1>
+
+    {% if items %}
+      <div class="order-items-grid">
+        {% set total_price = 0 %}
+        {% for item in items %}
+          {% set total_price = total_price + (item.price * item.quantity) %}
+          <div class="order-item-card">
+            <div class="order-item-info">
+              <h3>{{ item.name }}</h3>
+              <p>Количество: {{ item.quantity }} шт.</p>
+              <p class="price">Цена за штуку: {{ item.price }} ₽</p>
+              <p class="total">Итого: {{ item.price * item.quantity }} ₽</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="empty">В этом заказе пока нет товаров.</p>
+    {% endif %}
+
+    <a href="{{ url_for('orders.orders_page') }}" class="back-btn">← Назад к заказам</a>
+  </div>
+</section>
+{% endblock %}

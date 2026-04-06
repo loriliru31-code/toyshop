@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}ФанПлюш{% endblock %}</title>
+  <!-- Стили -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header class="header">
+  <div class="container header-inner">
+    
+    <!-- Логотип -->
+    <a href="{{ url_for('products.index') }}" class="logo">
+      <img src="{{ url_for('static', filename='img/logo.png') }}" alt="ФанПлюш">
+      <span>ФанПлюш</span>
+    </a>
+
+    <!-- Иконки справа -->
+    <div class="header-icons">
+  <a href="{{ url_for('products.catalog') }}" class="icon">
+    <img src="{{ url_for('static', filename='img/catalog.png') }}" alt="Каталог">
+  </a>
+
+  <a href="{{ url_for('cart.view_cart') }}" class="icon">
+  <img src="{{ url_for('static', filename='img/cart.png') }}" alt="Корзина">
+  <span id="cart-count" class="cart-count">0</span>
+</a>
+
+  <a href="{{ url_for('auth.profile') }}" class="icon">
+    <img src="{{ url_for('static', filename='img/user.png') }}" alt="Профиль">
+  </a>
+</div>
+
+  </div>
+</header>
+
+{% block content %}{% endblock %}
+<div id="auth-popup" class="auth-popup hidden">
+  <div class="auth-popup-content">
+    <p>Пожалуйста, войдите в аккаунт</p>
+    <a href="/login" class="login-link">Войти</a>
+  </div>
+</div>
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <h4>О магазине</h4>
+      <p>ФанПлюш — лучшие игрушки по мотивам игр</p>
+    </div>
+
+    <div>
+      <h4>Навигация</h4>
+      <p>
+        <a href="{{ url_for('products.index') }}">Главная</a><br>
+        <a href="{{ url_for('products.catalog') }}">Каталог</a><br>
+        <a href="{{ url_for('cart.view_cart') }}">Корзина</a>
+      </p>
+    </div>
+
+    <div>
+      <h4>Контакты</h4>
+      <p>Email: info@plushchaos.ru<br>Тел: +7 (999) 123-45-67</p>
+    </div>
+  </div>
+</footer>
+<script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+<script src="{{ url_for('static', filename='js/catalog.js') }}"></script>
+</body>
+</html>

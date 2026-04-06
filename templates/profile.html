@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="profile">
+  <div class="container profile-grid">
+
+    <!-- ПРОФИЛЬ -->
+    <div class="profile-card">
+      <h2>Мой профиль</h2>
+
+      <div class="profile-info">
+        <p><strong>Имя:</strong> {{ user.fullname }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+      </div>
+
+      <form method="POST" action="/update_profile" class="profile-form">
+        <input type="text" name="name" placeholder="Новое имя">
+        <input type="email" name="email" placeholder="Новый email">
+
+        <button type="submit">Сохранить</button>
+      </form>
+
+      <!-- Кнопка выхода -->
+      <form method="GET" action="/logout" class="profile-form">
+        <button type="submit" class="logout-btn">Выйти из аккаунта</button>
+      </form>
+    </div>
+
+    <!-- АДРЕС -->
+    <div class="profile-card">
+      <h2>Адрес доставки</h2>
+
+      <div class="profile-info">
+        <p>{{ user.address or "Адрес не указан" }}</p>
+      </div>
+
+      <form method="POST" action="/update_address" class="profile-form">
+        <input type="text" name="address" placeholder="Введите адрес">
+        <button type="submit">Сохранить адрес</button>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

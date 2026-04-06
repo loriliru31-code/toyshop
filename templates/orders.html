@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Мои заказы — Плюшевый Хаос{% endblock %}
+
+{% block content %}
+<section class="orders-page">
+  <div class="container">
+    <h1 class="page-title">Мои заказы</h1>
+
+    {% if orders %}
+      {% for order in orders %}
+      <div class="order-card">
+        <div class="order-header">
+          <span>Заказ #{{ order.id }}</span>
+          <span>Дата: {{ order.created_at.strftime('%d.%m.%Y %H:%M') }}</span>
+          <span class="order-status">Статус: В обработке</span>
+          <a href="{{ url_for('orders.order_items', order_id=order.id) }}" class="view-items">Посмотреть товары</a>
+        </div>
+        <div class="order-total">
+          <strong>Итого:</strong> {{ order.total_price }} ₽
+        </div>
+      </div>
+      {% endfor %}
+    {% else %}
+      <p class="empty">Вы пока не сделали ни одного заказа.</p>
+    {% endif %}
+
+  </div>
+</section>
+{% endblock %}

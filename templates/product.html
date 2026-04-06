@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }} — Плюшевый Хаос{% endblock %}
+
+{% block content %}
+<section class="product-detail">
+  <div class="container product-detail-grid">
+    
+    <!-- Картинка -->
+    <div class="product-detail-img">
+      <img src="{{ product.images }}" alt="{{ product.name }}">
+    </div>
+
+    <!-- Информация -->
+    <div class="product-detail-info">
+      
+      <div class="product-meta">
+        <h1>{{ product.name }}</h1>
+        <p class="price">{{ product.price }} ₽</p>
+      </div>
+
+      <!-- КНОПКА -->
+      <button 
+        class="btn-cart add-to-cart {% if product.id in cart_ids %}in-cart{% endif %}"
+        data-id="{{ product.id }}"
+        {% if product.id in cart_ids %}disabled{% endif %}
+      >
+        {% if product.id in cart_ids %}
+          ✓ В корзине
+        {% else %}
+          В корзину
+        {% endif %}
+      </button>
+
+    </div>
+
+  </div>
+</section>
+{% endblock %}

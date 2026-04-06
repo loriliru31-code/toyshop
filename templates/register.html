@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="auth">
+  <div class="container">
+
+    <div class="auth-card">
+
+      <div class="auth-header">
+        <div class="auth-icon">📝</div>
+        <h2>Регистрация</h2>
+      </div>
+
+      {% if error %}
+        <p class="error">{{ error }}</p>
+      {% endif %}
+
+      <form class="auth-form" method="POST">
+
+        <label>Имя</label>
+        <input type="text" name="full_name" required>
+
+        <label>Email</label>
+        <input type="email" name="email" required>
+
+        <label>Пароль</label>
+        <input type="password" name="password" required>
+
+        <button type="submit">Зарегистрироваться</button>
+
+      </form>
+
+      <p class="auth-link">
+        Уже есть аккаунт? <a href="/login">Войти</a>
+      </p>
+
+    </div>
+
+  </div>
+</section>
+{% endblock %}
